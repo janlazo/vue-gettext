@@ -77,6 +77,12 @@ const translate = {
       translated = translated[context]
     }
 
+    // Avoid a crash when a msgid exists with and without a context, see #32.
+    if (typeof translated === 'object' && !(translated instanceof Array)) {
+      // As things currently stand, the void key means a void context for easygettext.
+      translated = translated.hasOwnProperty('') ? translated[''] : void 0
+    }
+
     if (!translated) {
       if (!silent) {
         let msg = `Untranslated ${language} key found: ${msgid}`
@@ -86,12 +92,6 @@ const translate = {
         console.warn(msg)
       }
       return untranslated
-    }
-
-    // Avoid a crash when a msgid exists with and without a context, see #32.
-    if (!(translated instanceof Array) && translated.hasOwnProperty('')) {
-      // As things currently stand, the void key means a void context for easygettext.
-      translated = translated['']
     }
 
     if (typeof translated === 'string') {

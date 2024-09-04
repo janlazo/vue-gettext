@@ -88,9 +88,11 @@ describe('Translate tests', () => {
 
     Vue.config.language = 'fr_FR'
     expect(undetectableGettext('Pending')).to.equal('En cours')
+    expect(undetectableGettext('Answer')).to.equal('Answer')
 
     Vue.config.language = 'en_US'
     expect(undetectableGettext('Pending')).to.equal('Pending')
+    expect(undetectableGettext('Answer')).to.equal('Answer')
 
     expect(undetectableGettext('Pending', 'fr_FR')).to.equal('En cours')
   })
@@ -268,9 +270,11 @@ describe('Translate tests without Vue', () => {
 
     config.language = 'fr_FR'
     expect(undetectableGettext('Pending')).to.equal('En cours')
+    expect(undetectableGettext('Answer')).to.equal('Answer')
 
     config.language = 'en_US'
     expect(undetectableGettext('Pending')).to.equal('Pending')
+    expect(undetectableGettext('Answer')).to.equal('Answer')
 
     expect(undetectableGettext('Pending', 'fr_FR')).to.equal('En cours')
   })
